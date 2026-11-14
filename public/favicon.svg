@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="none">
+  <rect width="36" height="36" rx="6" fill="#101D2B"/>
+  <!-- Outer geometric distribution frame -->
+  <path d="M18 6L29 12.2V23.8L18 30L7 23.8V12.2L18 6Z" stroke="#176B62" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Internal data visibility sightlines & distribution conduits -->
+  <path d="M7 12.2L18 18.4L29 12.2" stroke="#E4E7E5" stroke-width="1.6" stroke-opacity="0.85" stroke-linejoin="round"/>
+  <path d="M18 18.4V30" stroke="#E4E7E5" stroke-width="1.6" stroke-opacity="0.85" stroke-linecap="round"/>
+  <!-- Verified intelligence focal node -->
+  <circle cx="18" cy="18.4" r="3.2" fill="#D9A441" stroke="#101D2B" stroke-width="1.2"/>
+  <!-- Peripheral distribution nodes -->
+  <circle cx="18" cy="6" r="1.8" fill="#176B62"/>
+  <circle cx="29" cy="12.2" r="1.8" fill="#176B62"/>
+  <circle cx="7" cy="12.2" r="1.8" fill="#176B62"/>
+</svg>

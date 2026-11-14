@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-navy: #101D2B;
+    --color-ivory: #F5F4EF;
+    --color-white: #FFFFFF;
+    --color-teal: #176B62;
+    --color-amber: #D9A441;
+    --color-charcoal: #202A32;
+    --color-slate: #697681;
+    --color-border: #E4E7E5;
+  }
+
+  html {
+    scroll-padding-top: 5rem;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    background-color: #F5F4EF;
+    color: #202A32;
+    overflow-x: hidden;
+  }
+
+  /* Accessible focus ring following modern-web-guidance accessibility guidelines */
+  :where(a:any-link, button, input, select, textarea, [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline: 2px solid #176B62;
+    outline-offset: 2px;
+  }
+}
+
+/* Visually hidden utility for screen-reader and skip-link support */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Subtle architectural grid background for precision engineering feel */
+.bg-architectural-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(16, 29, 43, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 29, 43, 0.035) 1px, transparent 1px);
+}
+
+.bg-architectural-grid-dark {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(228, 231, 229, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(228, 231, 229, 0.05) 1px, transparent 1px);
+}
+
+/* Responsive data table container and stacked fallback per modern-web-guidance */
+.table-region {
+  overflow-x: auto;
+  max-inline-size: 100%;
+  container-type: inline-size;
+}
