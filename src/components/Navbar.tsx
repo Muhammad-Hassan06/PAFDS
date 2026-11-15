@@ -28,8 +28,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = () => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, targetHref: string) => {
     setMobileMenuOpen(false);
+    // If the user opened /contact via pathname, ensure hash navigation resets pathname to '/'
+    if (window.location.pathname.toLowerCase().startsWith('/contact') && targetHref !== '#contact') {
+      e.preventDefault();
+      window.history.pushState({}, '', `/${targetHref}`);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
   };
 
   return (
@@ -52,6 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
           {/* Left: Logo & Wordmark */}
           <a
             href="#overview"
+            onClick={(e) => handleLinkClick(e, '#overview')}
             className="inline-flex items-center focus:outline-none rounded shrink-0"
             aria-label="DistriSight Home"
           >
@@ -68,6 +75,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                   <li key={item.href} className="flex">
                     <a
                       href={item.href}
+                      onClick={(e) => handleLinkClick(e, item.href)}
                       aria-current={isActive ? 'page' : undefined}
                       className={`inline-flex items-center whitespace-nowrap px-3 py-2 text-sm rounded-md transition-colors ${
                         isActive
@@ -84,6 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
 
             <a
               href="#platform"
+              onClick={(e) => handleLinkClick(e, '#platform')}
               className="inline-flex items-center whitespace-nowrap gap-1.5 px-4 py-2.5 text-sm font-medium text-white bg-teal hover:bg-teal-hover active:bg-navy rounded-md transition-colors shadow-sm"
             >
               <span>Explore the Platform</span>
@@ -126,7 +135,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    onClick={handleNavClick}
+                    onClick={(e) => handleLinkClick(e, item.href)}
                     aria-current={isActive ? 'page' : undefined}
                     className={`flex items-center justify-between px-3 py-2.5 rounded-md text-sm font-medium ${
                       isActive
@@ -144,7 +153,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
           <div className="mt-4 pt-4 border-t border-border">
             <a
               href="#platform"
-              onClick={handleNavClick}
+              onClick={(e) => handleLinkClick(e, '#platform')}
               className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-teal hover:bg-teal-hover rounded-md transition-colors"
             >
               <span>Explore the Platform</span>
