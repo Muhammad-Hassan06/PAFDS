@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, ShieldCheck, Mail } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
 export const FooterSection: React.FC = () => {
@@ -32,10 +32,10 @@ export const FooterSection: React.FC = () => {
                 <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
               </a>
               <a
-                href="#architecture"
+                href="#contact"
                 className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded bg-navy hover:bg-navy-dark text-ivory/85 border border-border-dark font-mono text-xs transition-colors"
               >
-                <span>Inspect Architecture Blueprint</span>
+                <span>Contact the Team</span>
               </a>
             </div>
           </div>
@@ -46,7 +46,7 @@ export const FooterSection: React.FC = () => {
       <footer className="bg-navy-dark text-ivory/80 pt-16 pb-12 border-t border-border-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-border-dark">
-            {/* Col 1: Brand & Description (4 cols) */}
+            {/* Col 1: Brand, Description & Contact Email (4 cols) */}
             <div className="lg:col-span-4 space-y-4">
               <BrandLogo variant="light" size="md" showTagline />
               <p className="text-sm text-ivory/70 leading-relaxed pr-4">
@@ -56,6 +56,15 @@ export const FooterSection: React.FC = () => {
               <p className="font-mono text-xs text-amber">
                 Trusted Data. Clear Insights. Smarter Distribution.
               </p>
+              <div className="pt-2">
+                <a
+                  href="mailto:distrisight.official@gmail.com"
+                  className="inline-flex items-center gap-2 text-xs font-mono text-ivory/90 hover:text-amber transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5 text-teal-muted" aria-hidden="true" />
+                  <span>distrisight.official@gmail.com</span>
+                </a>
+              </div>
             </div>
 
             {/* Col 2: Navigation Links (2 cols) */}
@@ -73,6 +82,7 @@ export const FooterSection: React.FC = () => {
                   { label: 'Architecture', href: '#architecture' },
                   { label: 'Team', href: '#team' },
                   { label: '16-Week Roadmap', href: '#roadmap' },
+                  { label: 'Contact', href: '#contact' },
                 ].map((link) => (
                   <li key={link.href}>
                     <a
@@ -146,7 +156,7 @@ export const FooterSection: React.FC = () => {
               &copy; {new Date().getFullYear()} DistriSight Final Year Project. All rights reserved.
             </div>
             <div>
-              Engineered for Wholesale Distribution Reliability, Analytics &amp; Security.
+              Contact: distrisight.official@gmail.com
             </div>
           </div>
         </div>

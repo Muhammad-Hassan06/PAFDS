@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { label: 'Security', href: '#security' },
   { label: 'Technology', href: '#technology' },
   { label: 'Team', href: '#team' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
@@ -58,7 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
           </a>
 
           {/* Center / Right Desktop Navigation */}
-          <nav aria-label="Primary" className="hidden md:flex items-center gap-6">
+          <nav aria-label="Primary" className="hidden md:flex items-center gap-4 lg:gap-6">
             <ul className="flex items-center gap-1">
               {NAV_ITEMS.map((item) => {
                 const sectionId = item.href.replace('#', '');
@@ -68,7 +69,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                     <a
                       href={item.href}
                       aria-current={isActive ? 'page' : undefined}
-                      className={`inline-flex items-center whitespace-nowrap px-3.5 py-2 text-sm rounded-md transition-colors ${
+                      className={`inline-flex items-center whitespace-nowrap px-3 py-2 text-sm rounded-md transition-colors ${
                         isActive
                           ? 'text-navy font-semibold bg-white border border-border shadow-sm'
                           : 'text-charcoal/80 font-medium hover:text-navy hover:bg-ivory-dark/50'

@@ -11,9 +11,18 @@ import { ArchitectureSection } from './components/ArchitectureSection';
 import { TeamSection } from './components/TeamSection';
 import { RoadmapSection } from './components/RoadmapSection';
 import { ImpactSection } from './components/ImpactSection';
+import { ContactSection } from './components/ContactSection';
 import { FooterSection } from './components/FooterSection';
 
-const OBSERVED_SECTIONS = ['overview', 'platform', 'capabilities', 'security', 'technology', 'team'];
+const OBSERVED_SECTIONS = [
+  'overview',
+  'platform',
+  'capabilities',
+  'security',
+  'technology',
+  'team',
+  'contact',
+];
 
 export function App() {
   const [activeSection, setActiveSection] = useState<string>('overview');
@@ -77,9 +86,12 @@ export function App() {
 
         {/* SECTION L — PROJECT IMPACT */}
         <ImpactSection />
+
+        {/* SECTION M — CONTACT & TEAM DIRECTORY */}
+        <ContactSection />
       </main>
 
-      {/* SECTION M — FINAL CTA & SECTION N — FOOTER */}
+      {/* SECTION N — FINAL CTA & FOOTER */}
       <FooterSection />
     </div>
   );
