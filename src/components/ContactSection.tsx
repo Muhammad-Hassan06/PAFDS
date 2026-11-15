@@ -19,7 +19,6 @@ export const ContactSection: React.FC = () => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      // Fallback if clipboard permission denied
       setCopied(false);
     }
   };
@@ -164,30 +163,37 @@ export const ContactSection: React.FC = () => {
 
           {/* Right 6 Columns: Direct Inquiry Form */}
           <div className="lg:col-span-6 rounded-lg bg-white border border-border-strong p-6 sm:p-8 shadow-editorial">
-            <h3 className="font-display text-xl font-bold text-navy">Send an Inquiry</h3>
+            <h3 id="contact-form-heading" className="font-display text-xl font-bold text-navy">
+              Send an Inquiry
+            </h3>
             <p className="mt-1 text-xs sm:text-sm text-slate">
               Fill out the details below to compose a direct message to{' '}
               <span className="font-mono text-navy font-medium">{OFFICIAL_EMAIL}</span>.
             </p>
 
-            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            <form
+              aria-labelledby="contact-form-heading"
+              onSubmit={handleSubmit}
+              className="mt-6 space-y-5"
+            >
               <div>
                 <label
                   htmlFor="contact-name"
                   className="block text-xs font-mono uppercase tracking-wider text-navy font-semibold mb-1.5"
                 >
-                  Your Name
+                  Full Name <span aria-hidden="true" className="text-teal">*</span>
                 </label>
                 <input
                   id="contact-name"
                   name="name"
                   type="text"
                   autoComplete="name"
+                  enterKeyHint="next"
                   required
                   value={senderName}
                   onChange={(e) => setSenderName(e.target.value)}
                   placeholder="e.g., Ahmad Tariq"
-                  className="w-full px-3.5 py-2.5 rounded-md bg-ivory/60 border border-border text-sm text-navy placeholder:text-slate/60 focus:bg-white"
+                  className="w-full min-h-[48px] px-3.5 py-2.5 rounded-md bg-ivory/60 border border-border-strong text-base text-navy placeholder:text-slate/60 focus:bg-white"
                 />
               </div>
 
@@ -197,18 +203,22 @@ export const ContactSection: React.FC = () => {
                     htmlFor="contact-email"
                     className="block text-xs font-mono uppercase tracking-wider text-navy font-semibold mb-1.5"
                   >
-                    Email Address
+                    Email Address <span aria-hidden="true" className="text-teal">*</span>
                   </label>
                   <input
                     id="contact-email"
                     name="email"
                     type="email"
                     autoComplete="email"
+                    autoCorrect="off"
+                    autoCapitalize="none"
+                    spellCheck={false}
+                    enterKeyHint="next"
                     required
                     value={senderEmail}
                     onChange={(e) => setSenderEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="w-full px-3.5 py-2.5 rounded-md bg-ivory/60 border border-border text-sm text-navy placeholder:text-slate/60 focus:bg-white"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-md bg-ivory/60 border border-border-strong text-base text-navy placeholder:text-slate/60 focus:bg-white"
                   />
                 </div>
 
@@ -224,10 +234,11 @@ export const ContactSection: React.FC = () => {
                     name="organization"
                     type="text"
                     autoComplete="organization"
+                    enterKeyHint="next"
                     value={organization}
                     onChange={(e) => setOrganization(e.target.value)}
                     placeholder="Distribution Co. / University"
-                    className="w-full px-3.5 py-2.5 rounded-md bg-ivory/60 border border-border text-sm text-navy placeholder:text-slate/60 focus:bg-white"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-md bg-ivory/60 border border-border-strong text-base text-navy placeholder:text-slate/60 focus:bg-white"
                   />
                 </div>
               </div>
@@ -244,7 +255,7 @@ export const ContactSection: React.FC = () => {
                   name="topic"
                   value={inquiryType}
                   onChange={(e) => setInquiryType(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-md bg-ivory/60 border border-border text-sm text-navy focus:bg-white"
+                  className="w-full min-h-[48px] px-3.5 py-2.5 rounded-md bg-ivory/60 border border-border-strong text-base text-navy focus:bg-white"
                 >
                   <option value="Wholesale Pilot / Product Demo">
                     Wholesale Pilot / Product Demo
@@ -267,7 +278,7 @@ export const ContactSection: React.FC = () => {
                   htmlFor="contact-message"
                   className="block text-xs font-mono uppercase tracking-wider text-navy font-semibold mb-1.5"
                 >
-                  Message
+                  Message <span aria-hidden="true" className="text-teal">*</span>
                 </label>
                 <textarea
                   id="contact-message"
@@ -277,13 +288,13 @@ export const ContactSection: React.FC = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Tell us about your distribution workflow or question for the team..."
-                  className="w-full px-3.5 py-2.5 rounded-md bg-ivory/60 border border-border text-sm text-navy placeholder:text-slate/60 focus:bg-white resize-y"
+                  className="w-full px-3.5 py-2.5 rounded-md bg-ivory/60 border border-border-strong text-base text-navy placeholder:text-slate/60 focus:bg-white resize-y"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-teal hover:bg-teal-hover text-white font-semibold text-sm transition-colors shadow-sm"
+                className="w-full min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-teal hover:bg-teal-hover text-white font-semibold text-sm transition-colors shadow-sm"
               >
                 <Send className="w-4 h-4" aria-hidden="true" />
                 <span>Send Message to {OFFICIAL_EMAIL}</span>
