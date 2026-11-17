@@ -13,82 +13,48 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   showTagline = false,
   iconOnly = false,
 }) => {
-  const dimensions = {
-    sm: { box: 28, text: 'text-base', sub: 'text-[10px]' },
-    md: { box: 34, text: 'text-lg', sub: 'text-[11px]' },
-    lg: { box: 40, text: 'text-xl', sub: 'text-xs' },
+  const heights = {
+    sm: 36,
+    md: 44,
+    lg: 54,
   }[size];
 
-  const isLight = variant === 'light';
-
+  // The logo PNG has a black background — wrap it in a dark rounded container
+  // so it looks clean on both the ivory navbar and the navy footer.
   return (
-    <div className="inline-flex items-center gap-2.5 select-none">
-      {/* Geometric Isometric Network + Sight Aperture Mark */}
-      <svg
-        width={dimensions.box}
-        height={dimensions.box}
-        viewBox="0 0 36 36"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        className="shrink-0"
+    <div className="inline-flex items-center select-none">
+      <div
+        className="rounded-lg overflow-hidden shrink-0 flex items-center justify-center"
+        style={{
+          background: '#000000',
+          height: heights,
+          width: heights,
+          padding: 2,
+        }}
       >
-        <rect
-          width="36"
-          height="36"
-          rx="6"
-          fill={isLight ? '#16273A' : '#101D2B'}
-          stroke={isLight ? '#233446' : '#101D2B'}
-          strokeWidth="1"
+        <img
+          src="/logo.png"
+          alt="DistriSight logo"
+          style={{ height: heights - 4, width: heights - 4, objectFit: 'contain' }}
+          draggable={false}
         />
-        {/* Hexagonal distribution perimeter */}
-        <path
-          d="M18 6.2L28.8 12.3V23.7L18 29.8L7.2 23.7V12.3L18 6.2Z"
-          stroke="#176B62"
-          strokeWidth="1.8"
-          strokeLinejoin="round"
-        />
-        {/* Internal sight vectors converging on verified center */}
-        <path
-          d="M7.2 12.3L18 18.4L28.8 12.3"
-          stroke="#F5F4EF"
-          strokeWidth="1.5"
-          strokeOpacity="0.88"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M18 18.4V29.8"
-          stroke="#F5F4EF"
-          strokeWidth="1.5"
-          strokeOpacity="0.88"
-          strokeLinecap="round"
-        />
-        {/* Verified core node (Muted Amber) */}
-        <circle
-          cx="18"
-          cy="18.4"
-          r="3.1"
-          fill="#D9A441"
-          stroke="#101D2B"
-          strokeWidth="1.2"
-        />
-        {/* Peripheral supply nodes */}
-        <circle cx="18" cy="6.2" r="1.7" fill="#176B62" />
-        <circle cx="28.8" cy="12.3" r="1.7" fill="#176B62" />
-        <circle cx="7.2" cy="12.3" r="1.7" fill="#176B62" />
-      </svg>
+      </div>
 
       {!iconOnly && (
-        <div className="flex flex-col">
-          <div className={`font-display font-bold tracking-tight leading-none ${dimensions.text}`}>
-            <span className={isLight ? 'text-ivory' : 'text-navy'}>Distri</span>
-            <span className={isLight ? 'text-amber' : 'text-teal'}>Sight</span>
+        <div className="ml-2.5 flex flex-col justify-center">
+          <div
+            className={`font-display font-bold tracking-tight leading-none ${
+              size === 'sm' ? 'text-base' : size === 'lg' ? 'text-xl' : 'text-lg'
+            }`}
+          >
+            <span className={variant === 'light' ? 'text-ivory' : 'text-navy'}>Distri</span>
+            <span className={variant === 'light' ? 'text-teal' : 'text-teal'}>Sight</span>
           </div>
           {showTagline && (
             <span
-              className={`font-mono uppercase tracking-widest mt-1 ${dimensions.sub} ${
-                isLight ? 'text-ivory/60' : 'text-slate'
-              }`}
+              className={`font-mono uppercase tracking-widest mt-1 ${
+                size === 'sm' ? 'text-[9px]' : size === 'lg' ? 'text-xs' : 'text-[10px]'
+              } ${variant === 'light' ? 'text-ivory/60' : 'text-slate'}`}
             >
               Distribution Intelligence
             </span>
