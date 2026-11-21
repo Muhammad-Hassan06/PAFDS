@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
 interface NavbarProps {
   activeSection: string;
+  onLaunchApp?: () => void;
 }
 
 const NAV_ITEMS = [
@@ -16,7 +17,7 @@ const NAV_ITEMS = [
   { label: 'Contact', href: '#contact' },
 ];
 
-export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeSection, onLaunchApp }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -35,6 +36,15 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
       e.preventDefault();
       window.history.pushState({}, '', `/${targetHref}`);
       window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
+
+  const handleLaunch = () => {
+    setMobileMenuOpen(false);
+    if (onLaunchApp) {
+      onLaunchApp();
+    } else {
+      window.location.hash = '#/app';
     }
   };
 
@@ -60,13 +70,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             href="#overview"
             onClick={(e) => handleLinkClick(e, '#overview')}
             className="inline-flex items-center focus:outline-none rounded shrink-0"
-            aria-label="DistriSight Home"
+            aria-label="DistributionIQ Home"
           >
             <BrandLogo variant="dark" size="md" />
           </a>
 
           {/* Center / Right Desktop Navigation */}
-          <nav aria-label="Primary" className="hidden md:flex items-center gap-4 lg:gap-6">
+          <nav aria-label="Primary" className="hidden md:flex items-center gap-3 lg:gap-5">
             <ul className="flex items-center gap-1">
               {NAV_ITEMS.map((item) => {
                 const sectionId = item.href.replace('#', '');
@@ -90,18 +100,28 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               })}
             </ul>
 
-            <a
-              href="#platform"
-              onClick={(e) => handleLinkClick(e, '#platform')}
-              className="inline-flex items-center whitespace-nowrap gap-1.5 px-4 py-2.5 text-sm font-medium text-white bg-teal hover:bg-teal-hover active:bg-navy rounded-md transition-colors shadow-sm"
+            {/* Launch Interactive Product MVP CTA */}
+            <button
+              onClick={handleLaunch}
+              className="inline-flex items-center whitespace-nowrap gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-teal hover:bg-teal-hover active:bg-navy rounded-md transition-colors shadow-sm"
+              title="Launch the Interactive Product MVP"
             >
-              <span>Explore the Platform</span>
-              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-            </a>
+              <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
+              <span>Launch Product MVP</span>
+              <ArrowUpRight className="w-4 h-4 text-emerald-200" aria-hidden="true" />
+            </button>
           </nav>
 
           {/* Mobile Hamburger Button */}
-          <div className="flex md:hidden">
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={handleLaunch}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-teal text-white text-xs font-semibold shadow-sm"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
+              <span>Launch MVP</span>
+            </button>
+
             <button
               type="button"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
@@ -125,7 +145,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
         <nav
           id="mobile-navigation-menu"
           aria-label="Mobile Primary"
-          className="md:hidden bg-white border-b border-border px-4 pt-3 pb-6 shadow-editorial-lg"
+          className="md:hidden bg-white border-b border-border px-4 pt-3 pb-6 shadow-editorial-lg space-y-3"
         >
           <ul className="space-y-1">
             {NAV_ITEMS.map((item) => {
@@ -150,15 +170,15 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             })}
           </ul>
 
-          <div className="mt-4 pt-4 border-t border-border">
-            <a
-              href="#platform"
-              onClick={(e) => handleLinkClick(e, '#platform')}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-teal hover:bg-teal-hover rounded-md transition-colors"
+          <div className="pt-2 border-t border-border">
+            <button
+              onClick={handleLaunch}
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white bg-teal hover:bg-teal-hover rounded-md transition-colors shadow-sm"
             >
-              <span>Explore the Platform</span>
-              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-            </a>
+              <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
+              <span>Launch Interactive Product MVP</span>
+              <ArrowUpRight className="w-4 h-4 text-emerald-200" aria-hidden="true" />
+            </button>
           </div>
         </nav>
       )}

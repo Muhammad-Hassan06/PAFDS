@@ -18,7 +18,11 @@ import {
 } from 'recharts';
 import { BRANCH_SAMPLES } from '../data/distrisightData';
 
-export const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  onLaunchApp?: () => void;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchApp }) => {
   const data = BRANCH_SAMPLES.all;
 
   return (
@@ -52,19 +56,20 @@ export const HeroSection: React.FC = () => {
 
           {/* Primary & Secondary CTAs */}
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href="#platform"
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base font-semibold text-white bg-teal hover:bg-teal-hover rounded-md transition-colors shadow-sm"
+            <button
+              onClick={onLaunchApp ? onLaunchApp : () => { window.location.hash = '#/app'; }}
+              className="inline-flex items-center gap-2.5 px-6 py-3 text-sm sm:text-base font-semibold text-white bg-teal hover:bg-teal-hover rounded-md transition-colors shadow-sm"
             >
-              <span>Explore the Platform</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
+              <span>Launch Product MVP</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </a>
+            </button>
 
             <a
-              href="#capabilities"
+              href="#platform"
               className="inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base font-semibold text-navy bg-white hover:bg-ivory-dark/50 border border-border-strong rounded-md transition-colors"
             >
-              <span>Discover Our Capabilities</span>
+              <span>Explore Architecture</span>
             </a>
           </div>
 

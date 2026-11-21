@@ -13,6 +13,7 @@ import { RoadmapSection } from './components/RoadmapSection';
 import { ImpactSection } from './components/ImpactSection';
 import { ContactSection } from './components/ContactSection';
 import { FooterSection } from './components/FooterSection';
+import { ProductApp } from './product/ProductApp';
 
 const OBSERVED_SECTIONS = [
   'overview',
@@ -36,7 +37,24 @@ function checkIsContactRoute(): boolean {
   );
 }
 
+function checkIsProductAppRoute(): boolean {
+  if (typeof window === 'undefined') return false;
+  const hash = window.location.hash.toLowerCase();
+  const path = window.location.pathname.toLowerCase();
+  const search = window.location.search.toLowerCase();
+  return (
+    hash.startsWith('#app') ||
+    hash.startsWith('#/app') ||
+    hash.startsWith('#dashboard') ||
+    hash.startsWith('#/dashboard') ||
+    path.startsWith('/app') ||
+    path.startsWith('/dashboard') ||
+    search.includes('view=app')
+  );
+}
+
 export function App() {
+  const [isProductPage, setIsProductPage] = useState<boolean>(() => checkIsProductAppRoute());
   const [isContactPage, setIsContactPage] = useState<boolean>(() => checkIsContactRoute());
   const [activeSection, setActiveSection] = useState<string>(() =>
     checkIsContactRoute() ? 'contact' : 'overview'
@@ -44,8 +62,16 @@ export function App() {
 
   useEffect(() => {
     const syncRoute = () => {
+      const productRouteActive = checkIsProductAppRoute();
       const contactRouteActive = checkIsContactRoute();
-      setIsContactPage(contactRouteActive);
+
+      setIsProductPage(productRouteActive);
+      setIsContactPage(!productRouteActive && contactRouteActive);
+
+      if (productRouteActive) {
+        window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+        return;
+      }
 
       if (contactRouteActive) {
         setActiveSection('contact');
@@ -55,7 +81,7 @@ export function App() {
 
       // If there's another hash (e.g., #platform, #team), scroll to that element once rendered
       const rawHash = window.location.hash.replace('#', '');
-      if (rawHash) {
+      if (rawHash && !rawHash.startsWith('/')) {
         requestAnimationFrame(() => {
           const targetEl = document.getElementById(rawHash);
           if (targetEl) {
@@ -76,7 +102,7 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (isContactPage) return;
+    if (isProductPage || isContactPage) return;
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 180;
@@ -96,33 +122,52 @@ export function App() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isContactPage]);
+  }, [isProductPage, isContactPage]);
 
   const handleBackToHome = () => {
-    if (window.location.pathname.toLowerCase().startsWith('/contact')) {
+    if (
+      window.location.pathname.toLowerCase().startsWith('/contact') ||
+      window.location.pathname.toLowerCase().startsWith('/app') ||
+      window.location.pathname.toLowerCase().startsWith('/dashboard')
+    ) {
       window.history.pushState({}, '', '/#overview');
     } else {
       window.location.hash = '#overview';
     }
+    setIsProductPage(false);
     setIsContactPage(false);
     setActiveSection('overview');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleLaunchProductApp = () => {
+    window.location.hash = '#/app';
+    setIsProductPage(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // If user requested the Product App (/app or #/app), render the full interactive Product MVP!
+  if (isProductPage) {
+    return <ProductApp onExitToWebsite={handleBackToHome} />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-ivory text-charcoal">
       {/* SECTION A — NAVIGATION */}
-      <Navbar activeSection={isContactPage ? 'contact' : activeSection} />
+      <Navbar
+        activeSection={isContactPage ? 'contact' : activeSection}
+        onLaunchApp={handleLaunchProductApp}
+      />
 
       {isContactPage ? (
         <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
-          {/* DEDICATED CONTACT PAGE VIEW (Triggered by QR code https://pafdsproject.vercel.app/#contact or /contact) */}
+          {/* DEDICATED CONTACT PAGE VIEW */}
           <ContactSection isStandalonePage onBackToHome={handleBackToHome} />
         </main>
       ) : (
         <main className="flex-1">
           {/* SECTION B — HERO SECTION & INTERACTIVE PRODUCT CONSOLE */}
-          <HeroSection />
+          <HeroSection onLaunchApp={handleLaunchProductApp} />
 
           {/* SECTION C — THE PROBLEM */}
           <ProblemSection />
@@ -160,7 +205,7 @@ export function App() {
       )}
 
       {/* SECTION N — FINAL CTA & FOOTER */}
-      <FooterSection />
+      <FooterSection onLaunchApp={handleLaunchProductApp} />
     </div>
   );
 }

@@ -2,7 +2,11 @@ import React from 'react';
 import { ArrowUpRight, ShieldCheck, Mail } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
-export const FooterSection: React.FC = () => {
+interface FooterSectionProps {
+  onLaunchApp?: () => void;
+}
+
+export const FooterSection: React.FC<FooterSectionProps> = ({ onLaunchApp }) => {
   return (
     <>
       {/* SECTION M — FINAL CTA */}
@@ -24,13 +28,14 @@ export const FooterSection: React.FC = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-end gap-3 shrink-0">
-              <a
-                href="#overview"
+              <button
+                onClick={onLaunchApp ? onLaunchApp : () => { window.location.hash = '#/app'; }}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded bg-teal hover:bg-teal-hover text-white font-semibold text-sm sm:text-base transition-colors shadow-sm"
               >
-                <span>Explore DistriSight</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
+                <span>Launch Product MVP</span>
                 <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-              </a>
+              </button>
               <a
                 href="#contact"
                 className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded bg-navy hover:bg-navy-dark text-ivory/85 border border-border-dark font-mono text-xs transition-colors"
