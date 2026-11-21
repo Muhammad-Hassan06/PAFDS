@@ -126,7 +126,7 @@ export const OverviewDashboard: React.FC = () => {
 
         {/* Stockout Risk */}
         <div
-          onClick={() => setActiveModule('stockout')}
+          onClick={() => setActiveModule('inventory')}
           className="p-4 bg-white border border-border rounded-lg shadow-panel flex flex-col justify-between cursor-pointer hover:border-rose-400 transition-colors"
         >
           <div className="flex items-center justify-between text-slate text-xs font-medium">
@@ -299,7 +299,7 @@ export const OverviewDashboard: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Card 1: Stockout */}
           <div
-            onClick={() => setActiveModule('stockout')}
+            onClick={() => setActiveModule('inventory')}
             className="p-3.5 rounded border border-rose-200 bg-rose-50/40 hover:bg-rose-50 hover:border-rose-300 cursor-pointer transition-all flex flex-col justify-between"
           >
             <div>

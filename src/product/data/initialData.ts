@@ -1067,7 +1067,7 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     description: 'Gourmet Cola 1.5L has only 4 days of stock remaining in Karachi and Lahore depots.',
     time: '18m ago',
     type: 'stockout',
-    targetModule: 'stockout',
+    targetModule: 'inventory',
     read: false,
   },
   {

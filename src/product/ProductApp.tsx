@@ -12,7 +12,7 @@ import { DataImpactModule } from './modules/DataImpactModule';
 import { SalesAnalyticsModule } from './modules/SalesAnalyticsModule';
 import { InventoryModule } from './modules/InventoryModule';
 import { DemandForecastingModule } from './modules/DemandForecastingModule';
-import { StockoutRiskModule } from './modules/StockoutRiskModule';
+import { AiGraphStudioModule } from './modules/AiGraphStudioModule';
 import { RecommendationsModule } from './modules/RecommendationsModule';
 import { AiAssistantModule } from './modules/AiAssistantModule';
 import { SecurityCenterModule } from './modules/SecurityCenterModule';
@@ -43,8 +43,8 @@ const ProductContent: React.FC<ProductAppProps> = ({ onExitToWebsite }) => {
         return <InventoryModule />;
       case 'forecast':
         return <DemandForecastingModule />;
-      case 'stockout':
-        return <StockoutRiskModule />;
+      case 'graph-studio':
+        return <AiGraphStudioModule />;
       case 'recommendations':
         return <RecommendationsModule />;
       case 'assistant':

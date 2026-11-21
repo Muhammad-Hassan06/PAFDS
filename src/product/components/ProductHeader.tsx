@@ -53,9 +53,9 @@ const MODULE_TITLES: Record<ProductModuleId, { title: string; subtitle: string }
     title: 'Demand Forecasting Engine',
     subtitle: 'Transparent moving-average & seasonal trend baseline with confidence interval bands',
   },
-  stockout: {
-    title: 'Stockout Risk Assessment Engine',
-    subtitle: 'Lead time run-rate analysis, stockout timeline projections, and emergency reorder quantities',
+  'graph-studio': {
+    title: 'AI Visual Trend & Graph Studio',
+    subtitle: 'Conversational data visualization engine with intelligent graph type selection and statistical analysis',
   },
   recommendations: {
     title: 'Decision Intelligence & Recommendations',

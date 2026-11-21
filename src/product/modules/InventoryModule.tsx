@@ -134,10 +134,10 @@ export const InventoryModule: React.FC = () => {
               />
             </div>
             <button
-              onClick={() => setActiveModule('stockout')}
+              onClick={() => setActiveModule('graph-studio')}
               className="px-3 py-1 bg-teal hover:bg-teal-hover text-white text-xs font-semibold rounded flex items-center gap-1.5 shadow-sm"
             >
-              <span>Stockout Engine</span>
+              <span>AI Graph Studio</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>

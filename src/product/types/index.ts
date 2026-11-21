@@ -13,7 +13,7 @@ export type ProductModuleId =
   | 'sales'
   | 'inventory'
   | 'forecast'
-  | 'stockout'
+  | 'graph-studio'
   | 'recommendations'
   | 'assistant'
   | 'security';
