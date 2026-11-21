@@ -356,7 +356,7 @@ export const OverviewDashboard: React.FC = () => {
 
           {/* Card 4: Supplier SLA Delay */}
           <div
-            onClick={() => setActiveModule('pipelines')}
+            onClick={() => setActiveModule('recommendations')}
             className="p-3.5 rounded border border-border bg-ivory/50 hover:bg-ivory hover:border-border-strong cursor-pointer transition-all flex flex-col justify-between"
           >
             <div>
@@ -475,3 +475,4 @@ export const OverviewDashboard: React.FC = () => {
     </div>
   );
 };
+

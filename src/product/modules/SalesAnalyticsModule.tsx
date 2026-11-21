@@ -423,3 +423,4 @@ export const SalesAnalyticsModule: React.FC = () => {
     </div>
   );
 };
+

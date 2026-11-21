@@ -330,3 +330,4 @@ export const WhatIfSimulatorModule: React.FC = () => {
     </div>
   );
 };
+

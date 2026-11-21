@@ -213,3 +213,4 @@ export const PipelineMonitoringModule: React.FC = () => {
     </div>
   );
 };
+

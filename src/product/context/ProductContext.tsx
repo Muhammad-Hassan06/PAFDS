@@ -16,6 +16,8 @@ import {
   AuditLogEntry,
   DataSourceItem,
   NotificationItem,
+  TeamMember,
+  TEAM_MEMBERS,
 } from '../types';
 import {
   INITIAL_PRODUCTS,
@@ -50,6 +52,8 @@ interface ProductContextType {
   setActiveModule: (module: ProductModuleId) => void;
   role: UserRole;
   setRole: (role: UserRole) => void;
+  currentMember: TeamMember;
+  setCurrentMember: (member: TeamMember) => void;
   branch: BranchId;
   setBranch: (branch: BranchId) => void;
   dateRange: DateRange;
@@ -111,10 +115,16 @@ const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeModule, setActiveModule] = useState<ProductModuleId>('overview');
+  const [currentMember, setCurrentMemberState] = useState<TeamMember>(TEAM_MEMBERS[0]);
   const [role, setRole] = useState<UserRole>('Owner');
   const [branch, setBranch] = useState<BranchId>('all');
   const [dateRange, setDateRange] = useState<DateRange>('30d');
   const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const setCurrentMember = useCallback((member: TeamMember) => {
+    setCurrentMemberState(member);
+    setRole(member.role);
+  }, []);
 
   // Primary State
   const [products, setProducts] = useState<ProductItem[]>(INITIAL_PRODUCTS);
@@ -141,7 +151,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
         const newEntry: AuditLogEntry = {
           id: newId,
           timestamp,
-          actor: `${role.toLowerCase()}_user`,
+          actor: `${currentMember.shortName} (${currentMember.title})`,
           role,
           action,
           module: moduleName,
@@ -153,7 +163,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return [...prevLogs, newEntry];
       });
     },
-    [role]
+    [role, currentMember]
   );
 
   // Filter sales by branch
@@ -479,6 +489,8 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setDateRange,
         searchQuery,
         setSearchQuery,
+        currentMember,
+        setCurrentMember,
         products,
         customers,
         suppliers,
@@ -520,3 +532,4 @@ export const useProduct = () => {
   }
   return context;
 };
+

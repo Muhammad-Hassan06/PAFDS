@@ -183,3 +183,4 @@ export const SyntheticGeneratorModule: React.FC = () => {
     </div>
   );
 };
+

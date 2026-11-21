@@ -199,7 +199,7 @@ export const DataRepairModule: React.FC = () => {
             </p>
           </div>
           <button
-            onClick={() => setActiveModule('audit')}
+            onClick={() => setActiveModule('security')}
             className="text-xs text-teal font-medium hover:underline flex items-center gap-1"
           >
             <span>View Full Audit Log</span>
@@ -363,3 +363,4 @@ export const DataRepairModule: React.FC = () => {
     </div>
   );
 };
+

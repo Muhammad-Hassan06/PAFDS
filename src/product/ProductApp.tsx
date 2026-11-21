@@ -3,7 +3,7 @@ import { ProductProvider, useProduct } from './context/ProductContext';
 import { ProductSidebar } from './components/ProductSidebar';
 import { ProductHeader } from './components/ProductHeader';
 
-// Modules
+// 12 Most Important Core Platform Modules
 import { OverviewDashboard } from './modules/OverviewDashboard';
 import { DataSourcesModule } from './modules/DataSourcesModule';
 import { DataQualityModule } from './modules/DataQualityModule';
@@ -13,16 +13,9 @@ import { SalesAnalyticsModule } from './modules/SalesAnalyticsModule';
 import { InventoryModule } from './modules/InventoryModule';
 import { DemandForecastingModule } from './modules/DemandForecastingModule';
 import { StockoutRiskModule } from './modules/StockoutRiskModule';
-import { WhatIfSimulatorModule } from './modules/WhatIfSimulatorModule';
 import { RecommendationsModule } from './modules/RecommendationsModule';
 import { AiAssistantModule } from './modules/AiAssistantModule';
-import { PipelineMonitoringModule } from './modules/PipelineMonitoringModule';
 import { SecurityCenterModule } from './modules/SecurityCenterModule';
-import { AiQueryGuardModule } from './modules/AiQueryGuardModule';
-import { RbacAuditModule } from './modules/RbacAuditModule';
-import { ExecutiveReportModule } from './modules/ExecutiveReportModule';
-import { SyntheticGeneratorModule } from './modules/SyntheticGeneratorModule';
-import { SettingsModule } from './modules/SettingsModule';
 
 interface ProductAppProps {
   onExitToWebsite: () => void;
@@ -52,26 +45,12 @@ const ProductContent: React.FC<ProductAppProps> = ({ onExitToWebsite }) => {
         return <DemandForecastingModule />;
       case 'stockout':
         return <StockoutRiskModule />;
-      case 'what-if':
-        return <WhatIfSimulatorModule />;
       case 'recommendations':
         return <RecommendationsModule />;
       case 'assistant':
         return <AiAssistantModule />;
-      case 'pipelines':
-        return <PipelineMonitoringModule />;
       case 'security':
         return <SecurityCenterModule />;
-      case 'guard':
-        return <AiQueryGuardModule />;
-      case 'audit':
-        return <RbacAuditModule />;
-      case 'report':
-        return <ExecutiveReportModule />;
-      case 'generator':
-        return <SyntheticGeneratorModule />;
-      case 'settings':
-        return <SettingsModule />;
       default:
         return <OverviewDashboard />;
     }

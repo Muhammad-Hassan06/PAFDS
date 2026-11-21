@@ -1094,7 +1094,7 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     description: 'Vendor SFTP gateway for Gourmet Beverages experienced connection timeout.',
     time: '3h ago',
     type: 'pipeline',
-    targetModule: 'pipelines',
+    targetModule: 'security',
     read: false,
   },
   {
@@ -1107,3 +1107,4 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     read: true,
   },
 ];
+

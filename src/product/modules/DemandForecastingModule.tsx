@@ -304,3 +304,4 @@ export const DemandForecastingModule: React.FC = () => {
     </div>
   );
 };
+

@@ -263,3 +263,4 @@ export const StockoutRiskModule: React.FC = () => {
     </div>
   );
 };
+

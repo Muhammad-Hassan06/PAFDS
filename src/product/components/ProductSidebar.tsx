@@ -9,24 +9,17 @@ import {
   Boxes,
   TrendingUp,
   AlertOctagon,
-  Sliders,
   Sparkles,
   MessageSquareText,
-  Activity,
   ShieldAlert,
-  ShieldCheck,
-  FileText,
-  Printer,
-  Cpu,
-  Settings,
   ChevronLeft,
   ChevronRight,
   LogOut,
-  Building2,
   UserCheck,
+  Users,
 } from 'lucide-react';
 import { useProduct } from '../context/ProductContext';
-import { ProductModuleId, UserRole } from '../types';
+import { ProductModuleId, UserRole, TEAM_MEMBERS, TeamMember } from '../types';
 
 interface ProductSidebarProps {
   collapsed: boolean;
@@ -44,6 +37,8 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
     setActiveModule,
     role,
     setRole,
+    currentMember,
+    setCurrentMember,
     repairs,
     products,
     securityThreats,
@@ -56,6 +51,7 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
   const activeThreats = securityThreats.filter((t) => t.status === 'Investigating' || t.status === 'Blocked').length;
   const activeRecs = recommendations.filter((r) => r.status === 'Active').length;
 
+  // The 12 Most Important Core Platform Modules
   const NAV_SECTIONS: Array<{
     title: string;
     items: Array<{
@@ -64,11 +60,10 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
       icon: React.ComponentType<{ className?: string }>;
       badge?: number;
       badgeColor?: string;
-      restrictedRoles?: UserRole[];
     }>;
   }> = [
     {
-      title: 'CORE INTELLIGENCE',
+      title: 'DATA & QUALITY INTELLIGENCE',
       items: [
         { id: 'overview', label: 'Executive Overview', icon: LayoutDashboard },
         { id: 'sources', label: 'Data Sources & Ingestion', icon: Database },
@@ -84,11 +79,11 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
       ],
     },
     {
-      title: 'ANALYTICS & PREDICTIVE',
+      title: 'COMMERCIAL & PREDICTIVE',
       items: [
-        { id: 'sales', label: 'Sales Analytics', icon: BarChart3 },
+        { id: 'sales', label: 'Commercial Sales Analytics', icon: BarChart3 },
         { id: 'inventory', label: 'Inventory Intelligence', icon: Boxes },
-        { id: 'forecast', label: 'Demand Forecasting', icon: TrendingUp },
+        { id: 'forecast', label: 'Demand Forecasting Engine', icon: TrendingUp },
         {
           id: 'stockout',
           label: 'Stockout Risk Engine',
@@ -96,11 +91,10 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
           badge: stockoutRisks,
           badgeColor: 'bg-rose-500 text-white',
         },
-        { id: 'what-if', label: 'What-If Simulator', icon: Sliders },
       ],
     },
     {
-      title: 'DECISION & AI',
+      title: 'DECISION & SECURITY',
       items: [
         {
           id: 'recommendations',
@@ -110,32 +104,23 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
           badgeColor: 'bg-teal text-white',
         },
         { id: 'assistant', label: 'AI Assistant (Urdu/Eng)', icon: MessageSquareText },
-      ],
-    },
-    {
-      title: 'OPERATIONS & SECURITY',
-      items: [
-        { id: 'pipelines', label: 'Pipeline Monitoring', icon: Activity },
         {
           id: 'security',
-          label: 'Security Center',
+          label: 'Security Center & Guard',
           icon: ShieldAlert,
           badge: activeThreats,
           badgeColor: 'bg-rose-600 text-white',
         },
-        { id: 'guard', label: 'AI Query Guard', icon: ShieldCheck },
-        { id: 'audit', label: 'Audit Logs & RBAC', icon: FileText },
-      ],
-    },
-    {
-      title: 'TOOLS & EXPORTS',
-      items: [
-        { id: 'report', label: 'Weekly Executive Report', icon: Printer },
-        { id: 'generator', label: 'Synthetic Generator', icon: Cpu },
-        { id: 'settings', label: 'System Settings', icon: Settings },
       ],
     },
   ];
+
+  const handleMemberChange = (memberId: string) => {
+    const selected = TEAM_MEMBERS.find((m) => m.id === memberId);
+    if (selected) {
+      setCurrentMember(selected);
+    }
+  };
 
   return (
     <aside
@@ -155,7 +140,7 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
                 Distribution<span className="text-teal-muted">IQ</span>
               </span>
               <span className="text-[10px] font-mono text-slate-light uppercase tracking-wider">
-                Product MVP
+                Product MVP &middot; 12 Core Modules
               </span>
             </div>
           )}
@@ -170,8 +155,8 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
         </button>
       </div>
 
-      {/* Nav List */}
-      <div className="flex-1 overflow-y-auto px-2 py-3 space-y-5 scrollbar-thin">
+      {/* Nav List: Exactly 12 Core Modules */}
+      <div className="flex-1 overflow-y-auto px-2 py-3 space-y-4 scrollbar-thin">
         {NAV_SECTIONS.map((section) => (
           <div key={section.title}>
             {!collapsed && (
@@ -216,38 +201,65 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
         ))}
       </div>
 
-      {/* Role Switcher & User Bottom Card */}
+      {/* Bottom Card: 4-Member Team Selector & Role Switcher */}
       <div className="p-2 border-t border-navy-light bg-navy-dark shrink-0 space-y-2">
         {!collapsed && (
-          <div className="px-1 py-1">
-            <div className="flex items-center justify-between text-[11px] font-mono text-slate-light mb-1">
-              <span className="flex items-center gap-1">
-                <UserCheck className="w-3 h-3 text-teal" /> Demo Role
-              </span>
-              <span className="text-[10px] text-teal">RBAC Active</span>
+          <div className="px-1 py-1 space-y-2">
+            {/* Team Member Switcher */}
+            <div>
+              <div className="flex items-center justify-between text-[11px] font-mono text-slate-light mb-1">
+                <span className="flex items-center gap-1">
+                  <Users className="w-3 h-3 text-teal" /> Active Member
+                </span>
+                <span className="text-[10px] text-teal-light font-bold">Team Profile</span>
+              </div>
+              <select
+                value={currentMember.id}
+                onChange={(e) => handleMemberChange(e.target.value)}
+                className="w-full bg-navy border border-navy-light text-white text-xs rounded px-2 py-1.5 focus:outline-none focus:border-teal font-medium"
+              >
+                {TEAM_MEMBERS.map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.name} ({m.title})
+                  </option>
+                ))}
+              </select>
             </div>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value as UserRole)}
-              className="w-full bg-navy border border-navy-light text-white text-xs rounded px-2 py-1.5 focus:outline-none focus:border-teal"
-            >
-              <option value="Owner">Owner (Full Permissions)</option>
-              <option value="Branch Manager">Branch Manager (Depot View)</option>
-              <option value="Analyst">Analyst (Query & ML Access)</option>
-              <option value="Auditor">Auditor (Read-Only & Logs)</option>
-            </select>
+
+            {/* Role / RBAC selector */}
+            <div>
+              <div className="flex items-center justify-between text-[11px] font-mono text-slate-light mb-1">
+                <span className="flex items-center gap-1">
+                  <UserCheck className="w-3 h-3 text-teal" /> RBAC Permission
+                </span>
+                <span className="text-[10px] text-teal">Enforced</span>
+              </div>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value as UserRole)}
+                className="w-full bg-navy border border-navy-light text-white text-xs rounded px-2 py-1 focus:outline-none focus:border-teal"
+              >
+                <option value="Owner">Owner (Full Privileges)</option>
+                <option value="Branch Manager">Branch Manager (Depot Scope)</option>
+                <option value="Analyst">Analyst (Query &amp; ML)</option>
+                <option value="Auditor">Auditor (Read-Only Logs)</option>
+              </select>
+            </div>
           </div>
         )}
 
-        <div className="flex items-center justify-between p-1">
+        {/* Selected Member Profile Card */}
+        <div className="flex items-center justify-between p-1 bg-navy/60 rounded border border-navy-light">
           <div className="flex items-center gap-2 overflow-hidden">
-            <div className="w-7 h-7 rounded-full bg-teal-hover flex items-center justify-center text-xs font-bold text-white shrink-0">
-              MH
+            <div className="w-7 h-7 rounded-full bg-teal flex items-center justify-center text-xs font-bold text-white shrink-0">
+              {currentMember.initials}
             </div>
             {!collapsed && (
               <div className="truncate">
-                <div className="text-xs font-medium text-white truncate">M. Hassan</div>
-                <div className="text-[10px] text-slate-light font-mono truncate">Distributor Lead</div>
+                <div className="text-xs font-semibold text-white truncate">{currentMember.name}</div>
+                <div className="text-[10px] text-slate-light font-mono truncate">
+                  {currentMember.title} &middot; {role}
+                </div>
               </div>
             )}
           </div>

@@ -10,6 +10,7 @@ import {
   AlertTriangle,
   ArrowRight,
   X,
+  User,
 } from 'lucide-react';
 import { useProduct } from '../context/ProductContext';
 import { BranchId, DateRange, ProductModuleId } from '../types';
@@ -50,15 +51,11 @@ const MODULE_TITLES: Record<ProductModuleId, { title: string; subtitle: string }
   },
   forecast: {
     title: 'Demand Forecasting Engine',
-    subtitle: 'Transparent moving-average & seasonal trend baseline with confidence interval intervals',
+    subtitle: 'Transparent moving-average & seasonal trend baseline with confidence interval bands',
   },
   stockout: {
     title: 'Stockout Risk Assessment Engine',
     subtitle: 'Lead time run-rate analysis, stockout timeline projections, and emergency reorder quantities',
-  },
-  'what-if': {
-    title: 'What-If Inventory Scenario Simulator',
-    subtitle: 'Model demand surge (+/-%) and supplier transit delays on stockouts and working capital',
   },
   recommendations: {
     title: 'Decision Intelligence & Recommendations',
@@ -66,35 +63,11 @@ const MODULE_TITLES: Record<ProductModuleId, { title: string; subtitle: string }
   },
   assistant: {
     title: 'AI Analytics Assistant (English + Roman Urdu)',
-    subtitle: 'Ask commercial questions in English or Roman Urdu; inspect grounded SQL queries and visualizations',
-  },
-  pipelines: {
-    title: 'Data Pipeline Health Monitoring',
-    subtitle: 'Real-time heartbeat, run history, and error logs for scheduled POS and ERP ingestion jobs',
+    subtitle: 'Ask commercial questions in English or Roman Urdu; inspect grounded SQL queries and lineage',
   },
   security: {
-    title: 'Enterprise Security Center',
-    subtitle: 'Threat monitoring: prompt injection defense, formula injection sanitization, and fraud alerts',
-  },
-  guard: {
-    title: 'AI Query Guard & AST Validator',
-    subtitle: 'Interactive workbench testing SQL AST validation, table allow-lists, and injection prevention',
-  },
-  audit: {
-    title: 'Tamper-Evident Audit Logs & RBAC',
-    subtitle: 'SHA-256 hash-chained immutable audit trail and role-based permissions matrix',
-  },
-  report: {
-    title: 'Weekly Executive Business Report',
-    subtitle: 'Formal executive summary combining commercial performance, risks, and data trustworthiness',
-  },
-  generator: {
-    title: 'Synthetic Distributor Data Generator',
-    subtitle: 'Switch between clean, realistic messy, and stress-test data presets to test engine capabilities',
-  },
-  settings: {
-    title: 'System Preferences & Workspace Settings',
-    subtitle: 'Configure currency (PKR), language preferences, and role security attributes',
+    title: 'Enterprise Security Center & AI Query Guard',
+    subtitle: 'Threat monitoring, interactive SQLGlot AST query guard workbench, and SHA-256 audit logs',
   },
 };
 
@@ -106,6 +79,7 @@ export const ProductHeader: React.FC<ProductHeaderProps> = ({
     activeModule,
     setActiveModule,
     role,
+    currentMember,
     branch,
     setBranch,
     dateRange,
@@ -264,12 +238,12 @@ export const ProductHeader: React.FC<ProductHeaderProps> = ({
                 <div className="p-2 border-t border-border bg-ivory text-center">
                   <button
                     onClick={() => {
-                      setActiveModule('audit');
+                      setActiveModule('security');
                       setNotificationsOpen(false);
                     }}
                     className="text-xs text-teal font-medium hover:underline inline-flex items-center gap-1"
                   >
-                    View System Audit Logs <ArrowRight className="w-3 h-3" />
+                    View Security &amp; Audit Logs <ArrowRight className="w-3 h-3" />
                   </button>
                 </div>
               </div>
@@ -296,11 +270,13 @@ export const ProductHeader: React.FC<ProductHeaderProps> = ({
           <p className="text-xs text-slate mt-0.5">{currentMeta.subtitle}</p>
         </div>
 
-        {/* Demo Mode Badge */}
+        {/* Active Member & Demo Mode Badge */}
         <div className="flex items-center gap-2 self-start sm:self-auto shrink-0 mt-1 sm:mt-0">
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-ivory border border-border text-[11px] font-mono text-slate">
             <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-            <span>Workspace: <strong>PAFDS Demo Hub</strong></span>
+            <span>Active Member: <strong className="text-navy">{currentMember.name}</strong></span>
+            <span className="text-slate/60">|</span>
+            <span className="text-teal font-semibold">{currentMember.title}</span>
             <span className="text-slate/60">|</span>
             <span className="text-navy font-semibold">{role}</span>
           </div>

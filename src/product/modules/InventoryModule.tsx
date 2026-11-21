@@ -336,3 +336,4 @@ export const InventoryModule: React.FC = () => {
     </div>
   );
 };
+

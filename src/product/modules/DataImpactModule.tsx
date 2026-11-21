@@ -286,3 +286,4 @@ export const DataImpactModule: React.FC = () => {
     </div>
   );
 };
+

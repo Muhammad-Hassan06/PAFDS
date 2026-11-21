@@ -236,3 +236,4 @@ export const RecommendationsModule: React.FC = () => {
     </div>
   );
 };
+

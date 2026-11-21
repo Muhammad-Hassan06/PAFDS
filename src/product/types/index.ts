@@ -14,16 +14,63 @@ export type ProductModuleId =
   | 'inventory'
   | 'forecast'
   | 'stockout'
-  | 'what-if'
   | 'recommendations'
   | 'assistant'
-  | 'pipelines'
-  | 'security'
-  | 'guard'
-  | 'audit'
-  | 'report'
-  | 'generator'
-  | 'settings';
+  | 'security';
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  shortName: string;
+  initials: string;
+  role: UserRole;
+  title: string;
+  domain: string;
+  email: string;
+}
+
+export const TEAM_MEMBERS: TeamMember[] = [
+  {
+    id: 'hassan',
+    name: 'Muhammad Hassan',
+    shortName: 'M. Hassan',
+    initials: 'MH',
+    role: 'Owner',
+    title: 'Project Lead',
+    domain: 'AI & Natural-Language Analytics',
+    email: 'hassan@distrisight.pk',
+  },
+  {
+    id: 'farjad',
+    name: 'Farjad Khan',
+    shortName: 'Farjad Khan',
+    initials: 'FK',
+    role: 'Branch Manager',
+    title: 'Backend Lead',
+    domain: 'Backend & Data Infrastructure',
+    email: 'farjad@distrisight.pk',
+  },
+  {
+    id: 'zain',
+    name: 'Zain Raza',
+    shortName: 'Zain Raza',
+    initials: 'ZR',
+    role: 'Analyst',
+    title: 'ML & Quality Lead',
+    domain: 'Data Quality Engine & Machine Learning',
+    email: 'zain@distrisight.pk',
+  },
+  {
+    id: 'shaji',
+    name: 'Shaji Naqvi',
+    shortName: 'Shaji Naqvi',
+    initials: 'SN',
+    role: 'Auditor',
+    title: 'Security Lead',
+    domain: 'Cybersecurity, Frontend & Testing',
+    email: 'shaji@distrisight.pk',
+  },
+];
 
 export interface ProductItem {
   id: string;
@@ -213,3 +260,4 @@ export interface DataSourceItem {
   qualityScore: number;
   sourceSize: string;
 }
+
