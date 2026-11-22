@@ -7,9 +7,9 @@ export type DateRange = '7d' | '30d' | '90d' | 'custom';
 export type ProductModuleId =
   | 'overview'
   | 'sources'
+  | 'schema-mapping'
   | 'quality'
   | 'repair'
-  | 'impact'
   | 'sales'
   | 'inventory'
   | 'forecast'

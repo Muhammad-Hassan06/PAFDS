@@ -4,7 +4,7 @@ import {
   Database,
   CheckCircle2,
   Wrench,
-  GitFork,
+  ArrowRightLeft,
   BarChart3,
   Boxes,
   TrendingUp,
@@ -67,6 +67,7 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
       items: [
         { id: 'overview', label: 'Executive Overview', icon: LayoutDashboard },
         { id: 'sources', label: 'Data Sources & Ingestion', icon: Database },
+        { id: 'schema-mapping', label: 'Smart Schema Mapping', icon: ArrowRightLeft },
         { id: 'quality', label: 'Data Quality Center', icon: CheckCircle2 },
         {
           id: 'repair',
@@ -75,7 +76,6 @@ export const ProductSidebar: React.FC<ProductSidebarProps> = ({
           badge: pendingRepairs,
           badgeColor: 'bg-amber text-navy',
         },
-        { id: 'impact', label: 'Quality Impact Analysis', icon: GitFork },
       ],
     },
     {

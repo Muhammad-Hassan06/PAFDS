@@ -13,6 +13,7 @@ import {
   Sparkles,
   Check,
   X,
+  ArrowRightLeft,
 } from 'lucide-react';
 import { useProduct } from '../context/ProductContext';
 import { DataSourceItem } from '../types';
@@ -100,16 +101,25 @@ export const DataSourcesModule: React.FC = () => {
             Active connections across branch Excel logs, POS systems, ERP databases, and customer records
           </p>
         </div>
-        <button
-          onClick={() => {
-            setIsUploading(true);
-            setUploadStep(1);
-          }}
-          className="flex items-center gap-2 px-4 py-2 bg-teal hover:bg-teal-hover text-white text-xs font-semibold rounded transition-colors shadow-sm self-start sm:self-auto"
-        >
-          <UploadCloud className="w-4 h-4" />
-          <span>Ingest New Dataset</span>
-        </button>
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <button
+            onClick={() => setActiveModule('schema-mapping')}
+            className="flex items-center gap-1.5 px-3 py-2 bg-ivory hover:bg-white text-navy border border-border text-xs font-semibold rounded transition-colors shadow-xs"
+          >
+            <ArrowRightLeft className="w-3.5 h-3.5 text-teal" />
+            <span>Open Schema Mapper</span>
+          </button>
+          <button
+            onClick={() => {
+              setIsUploading(true);
+              setUploadStep(1);
+            }}
+            className="flex items-center gap-2 px-4 py-2 bg-teal hover:bg-teal-hover text-white text-xs font-semibold rounded transition-colors shadow-sm"
+          >
+            <UploadCloud className="w-4 h-4" />
+            <span>Ingest New Dataset</span>
+          </button>
+        </div>
       </div>
 
       {/* Connected Data Sources Table */}

@@ -37,9 +37,9 @@ const MODULE_TITLES: Record<ProductModuleId, { title: string; subtitle: string }
     title: 'Data Repair & Approval Workflow',
     subtitle: 'Inspect proposed fixes, preview before/after deltas, and approve corrections with audit rollback',
   },
-  impact: {
-    title: 'Data Quality Impact Analysis',
-    subtitle: 'Trace how bad data distorts revenue figures, skews demand forecasting, and triggers false POs',
+  'schema-mapping': {
+    title: 'Smart Schema Mapping & Normalization',
+    subtitle: 'Resolve disparate headers across spreadsheets with LLM semantic and fuzzy matching, and standardize dates & units',
   },
   sales: {
     title: 'Commercial Sales Analytics',

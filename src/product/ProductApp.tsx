@@ -8,7 +8,7 @@ import { OverviewDashboard } from './modules/OverviewDashboard';
 import { DataSourcesModule } from './modules/DataSourcesModule';
 import { DataQualityModule } from './modules/DataQualityModule';
 import { DataRepairModule } from './modules/DataRepairModule';
-import { DataImpactModule } from './modules/DataImpactModule';
+import { SchemaMappingModule } from './modules/SchemaMappingModule';
 import { SalesAnalyticsModule } from './modules/SalesAnalyticsModule';
 import { InventoryModule } from './modules/InventoryModule';
 import { DemandForecastingModule } from './modules/DemandForecastingModule';
@@ -35,8 +35,8 @@ const ProductContent: React.FC<ProductAppProps> = ({ onExitToWebsite }) => {
         return <DataQualityModule />;
       case 'repair':
         return <DataRepairModule />;
-      case 'impact':
-        return <DataImpactModule />;
+      case 'schema-mapping':
+        return <SchemaMappingModule />;
       case 'sales':
         return <SalesAnalyticsModule />;
       case 'inventory':
